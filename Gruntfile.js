@@ -2,6 +2,8 @@
 
 module.exports = function (grunt) {
 
+  var javascriptfiles = grunt.file.readJSON('javascriptfiles.json');
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -18,7 +20,7 @@ module.exports = function (grunt) {
       },
       scripts: {
         files: ['assets/js/**/*.js', 'javascriptfiles.json'],
-        tasks: ['uglify:header', 'uglify:footer'],
+        tasks: ['uglify:vendor', 'uglify:header', 'uglify:footer'],
         options: {
           interrupt: false,
         }
@@ -36,14 +38,14 @@ module.exports = function (grunt) {
     // https://www.npmjs.org/package/grunt-includes
     includes: {
       files: {
-       src: ['pages/*.html'], // Source files
-       dest: 'web', // Destination directory
-       flatten: true,
-       cwd: '.',
-       options: {
-        includePath: 'pages/includes/'
-       }
-     }
+        src: ['pages/*.html'], // Source files
+        dest: 'web', // Destination directory
+        flatten: true,
+        cwd: '.',
+        options: {
+          includePath: 'pages/includes/'
+        }
+      }
     },
 
     // Grunt Contrib Compass
@@ -51,34 +53,59 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: 'sass',
-        cssDir: 'assets/css'
+        cssDir: 'assets/css',
       },
       dev: {
         options: {
           environment: 'development',
-          outputStyle: 'expanded',
-          importPath: 'node_modules/bootstrap-sass',
-        }
-      },
-      dist: {
-        options: {
-          environment: 'production',
           outputStyle: 'compact',
+          importPath: 'node_modules/bootstrap-sass',
         }
       },
     },
 
+    // Grunt Contrib Uglify - Will minify and merge javascript files
+    uglify: {
+      options: {
+        compress: true
+      },
+      vendor: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'assets/js/vendor.min.js': javascriptfiles.vendor
+        }
+      },
+      header: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'assets/js/header.min.js': javascriptfiles.header
+        }
+      },
+      footer: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'assets/js/footer.min.js': javascriptfiles.footer
+        }
+      }
+    },
+
   });
+
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-includes');
 
   grunt.registerTask('default', [
-    'uglify',
     'compass:dev',
     'includes',
+    'uglify',
     'watch'
   ]);
-
 };
