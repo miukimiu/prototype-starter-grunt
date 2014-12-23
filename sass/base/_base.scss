@@ -1,0 +1,40 @@
+// Base HTML styles
+
+// links
+a {
+    &:link,
+    &:visited {
+        color: brand-primary;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        outline: 0;
+    }
+}
+
+// focus styles
+a:focus,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    text-decoration: none !important;
+    background-color: $brand-primary !important;
+    color: $gray-dark !important;
+    outline: 3px solid $brand-primary;
+}
+
+// responsive media
+img {
+    max-width: 100%;
+}
+iframe,
+object,
+embed {
+    max-width: 100%;
+    max-height: 100%;
+    line-height: 0;
+    border: none !important;
+}

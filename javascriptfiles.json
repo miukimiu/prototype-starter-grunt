@@ -1,0 +1,7 @@
+{
+    "vendor" : [],
+    "header" : [],
+    "footer" : [
+        "pages/js/main.js"
+    ]
+}

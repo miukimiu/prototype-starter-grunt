@@ -1,0 +1,57 @@
+// footer styles
+
+#footer {
+    // layout structure variables
+    $footer-copyright-columns: 4;
+    $footer-menu-columns: 4;
+    $footer-menu-social-columns: 4;
+
+    // layout structure
+    .footer-inner {
+        @include make-row();
+    }
+    .footer-copyright {
+        @include make-sm-column($footer-copyright-columns);
+    }
+    .footer-menu {
+        @include make-sm-column($footer-menu-columns);
+    }
+    .footer-menu-social {
+        @include make-sm-column($footer-menu-social-columns);
+    }
+
+    // link styles
+    a {
+        color: $gray-darker;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            color: darken($gray-darker, 20%);
+        }
+    }
+}
+
+.footer-menus {
+
+    ul {
+        @include vertical-align();
+    }
+    .footer-menu {
+        float: left;
+        @extend %inline-list;
+    }
+    .footer-menu-social {
+        text-align: right;
+        @extend %inline-list;
+    }
+}
+
+.footer-copyright {
+    @include vertical-align();
+
+    p {
+        margin: 0;
+    }
+}

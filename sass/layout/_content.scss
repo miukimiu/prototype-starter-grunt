@@ -1,0 +1,21 @@
+// content styles
+
+.content {
+
+    .content-inner {
+        @include make-row();
+        margin: $brand-spacing 0;
+        padding: ($brand-spacing * 2) 0;
+    }
+
+    // content columns - 1 full, or 3 small, or 1 small and 1 large
+    .content-column-full {
+        @include make-sm-column(12);
+    }
+    .content-column-small {
+        @include make-sm-column(4);
+    }
+    .content-column-large {
+        @include make-sm-column(8);
+    }
+}

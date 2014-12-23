@@ -1,0 +1,38 @@
+// Header Styles
+
+#header {
+    $logo-sm-cols: 3;
+    $main-menu-sm-cols: 6;
+    $user-menu-sm-cols: 3;
+
+    //layout structure
+    .header-inner {
+        height: 80px;
+        @include make-row();
+    }
+    #header-logo {
+        @include make-sm-column($logo-sm-cols);
+    }
+    .main-menu {
+        @include make-sm-column($main-menu-sm-cols);
+    }
+    .user-menu {
+        @include make-sm-column($user-menu-sm-cols);
+    }
+}
+
+// header elements
+#header-logo {
+    @include vertical-align();
+    margin: 0;
+}
+.main-menu {
+    @include vertical-align();
+    text-align: center;
+    @extend %inline-list;
+}
+.user-menu {
+    @include vertical-align();
+    text-align: right;
+    @extend %inline-list;
+}

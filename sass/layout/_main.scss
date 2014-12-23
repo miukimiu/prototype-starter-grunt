@@ -1,0 +1,38 @@
+// Main Styles
+
+#main {
+
+    .main-inner {
+        @include make-row();
+    }
+
+    // full width template
+    & .is-full-width {
+
+        .content {
+            @include make-xs-column(12);
+        }
+    }
+
+    // sidebar template
+    & .has-sidebar {
+        $content-sm-cols: 9;
+        $sidebar-sm-cols: 3;
+
+        .content {
+            @include make-xs-column(12);
+            @include make-sm-column($content-sm-cols);
+            @include make-sm-column-push($sidebar-sm-cols);
+        }
+        .sidebar {
+            @include make-xs-column(12);
+            @include make-sm-column($sidebar-sm-cols);
+            @include make-sm-column-pull($content-sm-cols);
+        }
+    }
+}
+
+// sidebar
+.sidebar {
+    background: $gray-lighter;
+}
